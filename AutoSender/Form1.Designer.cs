@@ -37,6 +37,7 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.lblAmount = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkDBControl = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSMTPServer = new System.Windows.Forms.TextBox();
@@ -47,9 +48,12 @@
             this.txtSenderMail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkDBControl = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioRAC = new System.Windows.Forms.RadioButton();
+            this.radioRPO_RAC = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -140,6 +144,18 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры пересылки";
+            // 
+            // chkDBControl
+            // 
+            this.chkDBControl.AutoSize = true;
+            this.chkDBControl.Checked = true;
+            this.chkDBControl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDBControl.Location = new System.Drawing.Point(54, 170);
+            this.chkDBControl.Name = "chkDBControl";
+            this.chkDBControl.Size = new System.Drawing.Size(156, 17);
+            this.chkDBControl.TabIndex = 7;
+            this.chkDBControl.Text = "Контроль по базе данных";
+            this.chkDBControl.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -233,23 +249,45 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Почтовый ящик отправки";
             // 
-            // chkDBControl
+            // groupBox2
             // 
-            this.chkDBControl.AutoSize = true;
-            this.chkDBControl.Checked = true;
-            this.chkDBControl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDBControl.Location = new System.Drawing.Point(54, 170);
-            this.chkDBControl.Name = "chkDBControl";
-            this.chkDBControl.Size = new System.Drawing.Size(156, 17);
-            this.chkDBControl.TabIndex = 7;
-            this.chkDBControl.Text = "Контроль по базе данных";
-            this.chkDBControl.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.radioRPO_RAC);
+            this.groupBox2.Controls.Add(this.radioRAC);
+            this.groupBox2.Location = new System.Drawing.Point(51, 135);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(131, 74);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Режим TNS";
+            // 
+            // radioRAC
+            // 
+            this.radioRAC.AutoSize = true;
+            this.radioRAC.Location = new System.Drawing.Point(6, 19);
+            this.radioRAC.Name = "radioRAC";
+            this.radioRAC.Size = new System.Drawing.Size(47, 17);
+            this.radioRAC.TabIndex = 0;
+            this.radioRAC.Text = "RAC";
+            this.radioRAC.UseVisualStyleBackColor = true;
+            // 
+            // radioRPO_RAC
+            // 
+            this.radioRPO_RAC.AutoSize = true;
+            this.radioRPO_RAC.Checked = true;
+            this.radioRPO_RAC.Location = new System.Drawing.Point(6, 42);
+            this.radioRPO_RAC.Name = "radioRPO_RAC";
+            this.radioRPO_RAC.Size = new System.Drawing.Size(76, 17);
+            this.radioRPO_RAC.TabIndex = 0;
+            this.radioRPO_RAC.TabStop = true;
+            this.radioRPO_RAC.Text = "RPO_RAC";
+            this.radioRPO_RAC.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 237);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.btnSend);
@@ -264,6 +302,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,6 +331,9 @@
         private System.Windows.Forms.ToolStripMenuItem базаДанныхToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem проверитьЛимитОтправкиToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkDBControl;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioRPO_RAC;
+        private System.Windows.Forms.RadioButton radioRAC;
     }
 }
 

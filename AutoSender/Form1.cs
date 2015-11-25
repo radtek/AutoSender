@@ -35,6 +35,16 @@ namespace AutoSender
             txtReceiverMails.Text = Properties.Settings.Default.strReceiverMails;
             comboBox1.SelectedItem = comboBox1.Items[Properties.Settings.Default.strSelectedIndex];
             chkDBControl.Checked = Properties.Settings.Default.strDBControl;
+            if (Properties.Settings.Default.strTNSRACMode)
+            {
+                radioRAC.Checked = true;
+                radioRPO_RAC.Checked = false;
+            }
+            else
+            {
+                radioRAC.Checked = false;
+                radioRPO_RAC.Checked = true;
+            }
             if (Directory.Exists("ToLoad") && Directory.Exists("Loaded"))
             {
                 lblFilesCount.Text = "Найдено: " + (Directory.GetFiles("ToLoad").Count()).ToString();
@@ -76,7 +86,7 @@ namespace AutoSender
                         b = true;
                         if (chkDBControl.Checked)
                         {
-                            using (OracleConnection Conn = new OracleConnection(@"Data Source=rpo_rac; User Id=romanchuk; Password=niips123"))
+                            using (OracleConnection Conn = new OracleConnection(@"Data Source=" + (radioRPO_RAC.Checked ? "rpo_rac" : "rpo") + "; User Id=romanchuk; Password=niips123"))
                             {
                                 if (Conn.State != ConnectionState.Open)
                                     Conn.Open();
@@ -174,6 +184,10 @@ namespace AutoSender
             Properties.Settings.Default.strReceiverMails = txtReceiverMails.Text;
             Properties.Settings.Default.strSelectedIndex = comboBox1.SelectedIndex;
             Properties.Settings.Default.strDBControl = chkDBControl.Checked;
+            if (radioRAC.Checked)
+                Properties.Settings.Default.strTNSRACMode = true;
+            else
+                Properties.Settings.Default.strTNSRACMode = false;
             Properties.Settings.Default.Save();
         }
 
@@ -187,8 +201,8 @@ namespace AutoSender
                                                                     "(ADDRESS=(PROTOCOL=TCP)(HOST=10.7.30.147)(PORT=1521)))" +
                                                                     "(CONNECT_DATA)=(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=180)(DELAY=5))" +
                                                                     "(SERVER=dedicated)(SERVICE_NAME=rpo)(UR=A)));" + */
-                                                                    "rpo_rac;" +
-                                                                    "Password=niips123;User Id=romanchuk"))
+                                                                    (radioRPO_RAC.Checked ? "rpo_rac" : "rpo") +
+                                                                    ";Password=niips123;User Id=romanchuk"))
                 {
                     if (Conn.State != ConnectionState.Open)
                     {

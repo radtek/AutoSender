@@ -94,5 +94,17 @@ namespace AutoSender.Properties {
                 this["strDBControl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool strTNSRACMode {
+            get {
+                return ((bool)(this["strTNSRACMode"]));
+            }
+            set {
+                this["strTNSRACMode"] = value;
+            }
+        }
     }
 }
