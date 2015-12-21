@@ -106,5 +106,17 @@ namespace AutoSender.Properties {
                 this["strTNSRACMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string strSendTimeout {
+            get {
+                return ((string)(this["strSendTimeout"]));
+            }
+            set {
+                this["strSendTimeout"] = value;
+            }
+        }
     }
 }

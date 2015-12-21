@@ -1,9 +1,9 @@
 C:\GitRepository\AutoSender\AutoSender\AutoSender\bin\Release\AutoSender.exe.config
+C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.exe
+C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.pdb
 C:\GitRepository\AutoSender\AutoSender\AutoSender\bin\Release\AutoSender.exe
 C:\GitRepository\AutoSender\AutoSender\AutoSender\bin\Release\AutoSender.pdb
 C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.csprojResolveAssemblyReference.cache
 C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.Form1.resources
 C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.Properties.Resources.resources
 C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.csproj.GenerateResource.Cache
-C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.exe
-C:\GitRepository\AutoSender\AutoSender\AutoSender\obj\Release\AutoSender.pdb

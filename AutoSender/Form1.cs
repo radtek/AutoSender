@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Data.OracleClient;
+using System.Threading;
 
 namespace AutoSender
 {
@@ -34,6 +35,7 @@ namespace AutoSender
             txtSMTPServer.Text = Properties.Settings.Default.strSMTPServer;
             txtReceiverMails.Text = Properties.Settings.Default.strReceiverMails;
             comboBox1.SelectedItem = comboBox1.Items[Properties.Settings.Default.strSelectedIndex];
+            txtSendTimeout.Text = Properties.Settings.Default.strSendTimeout;
             chkDBControl.Checked = Properties.Settings.Default.strDBControl;
             if (Properties.Settings.Default.strTNSRACMode)
             {
@@ -119,10 +121,11 @@ namespace AutoSender
                         MailMessage mail = new MailMessage();
                         mail.From = new MailAddress(txtSenderMail.Text);
                         string ReceiverMails = txtReceiverMails.Text.Replace("\r\n", "");
+                        ReceiverMails = ReceiverMails.Replace(" ", "");
                         foreach (string ReceiverMail in ReceiverMails.Split(';'))
                             mail.To.Add(new MailAddress(ReceiverMail));
-                        mail.Subject = "autosender";
-                        mail.Body = "";
+                        mail.Subject = "MAIL";
+                        mail.Body = SelValue + " attached files to load";
                         for (int i = 0; i < SelValue; i++)
                             mail.Attachments.Add(new Attachment(FileNames[i]));
                         SmtpClient client = new SmtpClient();
@@ -139,6 +142,7 @@ namespace AutoSender
                             FileInfo FI = new FileInfo(FileNames[i]);
                             FI.MoveTo("Loaded\\" + FI.Name);
                         }
+                        Thread.Sleep(Convert.ToInt32(txtSendTimeout.Text));
                     }
                     else
                     {
@@ -147,10 +151,11 @@ namespace AutoSender
                         MailMessage mail = new MailMessage();
                         mail.From = new MailAddress(txtSenderMail.Text);
                         string ReceiverMails = txtReceiverMails.Text.Replace("\r\n", "");
+                        ReceiverMails = ReceiverMails.Replace(" ", "");
                         foreach (string ReceiverMail in ReceiverMails.Split(';'))
                             mail.To.Add(new MailAddress(ReceiverMail));
-                        mail.Subject = "autosender";
-                        mail.Body = "";
+                        mail.Subject = "MAIL";
+                        mail.Body = FileNames.Length + " attached files to load";
                         for (int i = 0; i < FileNames.Length; i++)
                             mail.Attachments.Add(new Attachment(FileNames[i]));
                         SmtpClient client = new SmtpClient();
@@ -167,8 +172,13 @@ namespace AutoSender
                             FileInfo FI = new FileInfo(FileNames[i]);
                             FI.MoveTo("Loaded\\" + FI.Name);
                         }
+                        Thread.Sleep(Convert.ToInt32(txtSendTimeout.Text));
                     }
                 }
+            }
+            catch (InvalidCastException)
+            {
+                MessageBox.Show("Введите верное значение");
             }
             catch (Exception ex)
             {
@@ -184,6 +194,7 @@ namespace AutoSender
             Properties.Settings.Default.strReceiverMails = txtReceiverMails.Text;
             Properties.Settings.Default.strSelectedIndex = comboBox1.SelectedIndex;
             Properties.Settings.Default.strDBControl = chkDBControl.Checked;
+            Properties.Settings.Default.strSendTimeout = txtSendTimeout.Text;
             if (radioRAC.Checked)
                 Properties.Settings.Default.strTNSRACMode = true;
             else
@@ -225,6 +236,32 @@ namespace AutoSender
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists("ToLoad") && Directory.Exists("Loaded"))
+            {
+                lblFilesCount.Text = "Найдено: " + (Directory.GetFiles("ToLoad").Count()).ToString();
+                if (Directory.GetFiles("ToLoad").Count() > 0)
+                    btnSend.Enabled = true;
+                else
+                    btnSend.Enabled = false;
+            }
+            else
+            {
+                btnSend.Enabled = false;
+                if (!Directory.Exists("ToLoad"))
+                {
+                    lblFilesCount.Text = "Отсутствует папка \"ToLoad\"";
+                    return;
+                }
+                else
+                {
+                    lblFilesCount.Text = "Отсутствует папка \"Loaded\"";
+                    return;
+                }
             }
         }
     }

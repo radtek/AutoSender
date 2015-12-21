@@ -49,8 +49,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioRAC = new System.Windows.Forms.RadioButton();
             this.radioRPO_RAC = new System.Windows.Forms.RadioButton();
+            this.radioRAC = new System.Windows.Forms.RadioButton();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtSendTimeout = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,7 +112,7 @@
             // btnSend
             // 
             this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(28, 70);
+            this.btnSend.Location = new System.Drawing.Point(28, 56);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(183, 23);
             this.btnSend.TabIndex = 1;
@@ -120,13 +123,15 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(25, 109);
+            this.lblAmount.Location = new System.Drawing.Point(25, 98);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(0, 13);
             this.lblAmount.TabIndex = 3;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtSendTimeout);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.chkDBControl);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label5);
@@ -140,7 +145,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(226, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(565, 198);
+            this.groupBox1.Size = new System.Drawing.Size(565, 214);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры пересылки";
@@ -150,7 +155,7 @@
             this.chkDBControl.AutoSize = true;
             this.chkDBControl.Checked = true;
             this.chkDBControl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDBControl.Location = new System.Drawing.Point(54, 170);
+            this.chkDBControl.Location = new System.Drawing.Point(55, 189);
             this.chkDBControl.Name = "chkDBControl";
             this.chkDBControl.Size = new System.Drawing.Size(156, 17);
             this.chkDBControl.TabIndex = 7;
@@ -169,7 +174,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox1.Location = new System.Drawing.Point(196, 140);
+            this.comboBox1.Location = new System.Drawing.Point(192, 137);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(76, 21);
             this.comboBox1.TabIndex = 6;
@@ -177,7 +182,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 143);
+            this.label5.Location = new System.Drawing.Point(6, 140);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(184, 13);
             this.label5.TabIndex = 2;
@@ -253,22 +258,12 @@
             // 
             this.groupBox2.Controls.Add(this.radioRPO_RAC);
             this.groupBox2.Controls.Add(this.radioRAC);
-            this.groupBox2.Location = new System.Drawing.Point(51, 135);
+            this.groupBox2.Location = new System.Drawing.Point(51, 127);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(131, 74);
+            this.groupBox2.Size = new System.Drawing.Size(131, 61);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Режим TNS";
-            // 
-            // radioRAC
-            // 
-            this.radioRAC.AutoSize = true;
-            this.radioRAC.Location = new System.Drawing.Point(6, 19);
-            this.radioRAC.Name = "radioRAC";
-            this.radioRAC.Size = new System.Drawing.Size(47, 17);
-            this.radioRAC.TabIndex = 0;
-            this.radioRAC.Text = "RAC";
-            this.radioRAC.UseVisualStyleBackColor = true;
             // 
             // radioRPO_RAC
             // 
@@ -282,11 +277,48 @@
             this.radioRPO_RAC.Text = "RPO_RAC";
             this.radioRPO_RAC.UseVisualStyleBackColor = true;
             // 
+            // radioRAC
+            // 
+            this.radioRAC.AutoSize = true;
+            this.radioRAC.Location = new System.Drawing.Point(6, 19);
+            this.radioRAC.Name = "radioRAC";
+            this.radioRAC.Size = new System.Drawing.Size(47, 17);
+            this.radioRAC.TabIndex = 0;
+            this.radioRAC.Text = "RAC";
+            this.radioRAC.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(51, 212);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(131, 23);
+            this.btnRefresh.TabIndex = 6;
+            this.btnRefresh.Text = "Проверить папки";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 166);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(161, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Таймаут между письмами, мс";
+            // 
+            // txtSendTimeout
+            // 
+            this.txtSendTimeout.Location = new System.Drawing.Point(173, 163);
+            this.txtSendTimeout.Name = "txtSendTimeout";
+            this.txtSendTimeout.Size = new System.Drawing.Size(100, 20);
+            this.txtSendTimeout.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 237);
+            this.ClientSize = new System.Drawing.Size(799, 249);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblAmount);
@@ -334,6 +366,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radioRPO_RAC;
         private System.Windows.Forms.RadioButton radioRAC;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TextBox txtSendTimeout;
+        private System.Windows.Forms.Label label6;
     }
 }
 
